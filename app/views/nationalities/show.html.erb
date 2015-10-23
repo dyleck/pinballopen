@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @nationality.name %>
+</p>
+
+<p>
+  <strong>Flag img path:</strong>
+  <%= @nationality.flag_img_path %>
+</p>
+
+<%= link_to 'Edit', edit_nationality_path(@nationality) %> |
+<%= link_to 'Back', nationalities_path %>
