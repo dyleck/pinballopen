@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151023080447) do
+ActiveRecord::Schema.define(version: 20151023130546) do
 
   create_table "nationalities", force: true do |t|
     t.string   "name"
@@ -26,16 +26,22 @@ ActiveRecord::Schema.define(version: 20151023080447) do
     t.datetime "updated_at"
   end
 
+  create_table "roles_users", id: false, force: true do |t|
+    t.integer "user_id"
+    t.integer "role_id"
+  end
+
+  add_index "roles_users", ["role_id"], name: "index_roles_users_on_role_id"
+  add_index "roles_users", ["user_id"], name: "index_roles_users_on_user_id"
+
   create_table "users", force: true do |t|
     t.string   "first_name"
     t.string   "last_name"
     t.integer  "nationality_id"
-    t.integer  "role_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "users", ["nationality_id"], name: "index_users_on_nationality_id"
-  add_index "users", ["role_id"], name: "index_users_on_role_id"
 
 end
