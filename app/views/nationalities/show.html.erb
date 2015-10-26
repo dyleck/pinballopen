@@ -6,8 +6,8 @@
 </p>
 
 <p>
-  <strong>Flag img path:</strong>
-  <%= @nationality.flag_img_path %>
+  <strong>Flag image:</strong>
+  <%= image_tag @nationality.flag_img_path, size: "40x30" %>
 </p>
 
 <%= link_to 'Edit', edit_nationality_path(@nationality) %> |

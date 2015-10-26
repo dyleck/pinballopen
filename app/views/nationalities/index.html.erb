@@ -5,6 +5,7 @@
     <tr>
       <th>Name</th>
       <th>Flag img path</th>
+      <th>Flag image</th>
       <th></th>
       <th></th>
       <th></th>
@@ -16,6 +17,7 @@
       <tr>
         <td><%= nationality.name %></td>
         <td><%= nationality.flag_img_path %></td>
+        <td><%= image_tag nationality.flag_img_path, size: "50x30", class: 'flag_class' %></td>
         <td><%= link_to 'Show', nationality %></td>
         <td><%= link_to 'Edit', edit_nationality_path(nationality) %></td>
         <td><%= link_to 'Destroy', nationality, method: :delete, data: { confirm: 'Are you sure?' } %></td>

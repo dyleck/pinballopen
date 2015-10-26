@@ -21,11 +21,13 @@
   </div>
   <div class="field">
     <%= f.label :nationality_id %><br>
-    <%= f.collection_select :nationality_id, Nationality.all, :id, :name %>
+    <%= f.select :nationality_id, options_for_select(Nationality.all.map { |n| [n.name, n.id] }) %>
   </div>
   <div class="field">
-    <%= f.label :role_id %><br>
-    <%= f.collection_select :role_id, Role.all, :id, :name %>
+    <%= f.label :role %><br>
+    <%= f.collection_select :roles, Role.all, :id, :name,
+                            { selected: @user.roles.map { |r| r.id } },
+                            { multiple: true } %>
   </div>
   <div class="actions">
     <%= f.submit %>

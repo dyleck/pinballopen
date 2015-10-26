@@ -12,12 +12,16 @@
 
 <p>
   <strong>Nationality:</strong>
-  <%= @user.nationality %>
+  <%= @user.nationality.name %>
 </p>
 
 <p>
-  <strong>Role:</strong>
-  <%= @user.role %>
+  <strong>Roles:</strong>
+  <ul>
+    <% @user.roles.each do |role| %>
+        <li><%= role.name %></li>
+    <% end %>
+  </ul>
 </p>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |

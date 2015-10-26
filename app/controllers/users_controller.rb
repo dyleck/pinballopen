@@ -24,7 +24,7 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    @user = User.new(user_params)
+    @user = User.new convert_roles_to_objects
 
     respond_to do |format|
       if @user.save
@@ -41,7 +41,7 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1.json
   def update
     respond_to do |format|
-      if @user.update(user_params)
+      if @user.update convert_roles_to_objects
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { head :no_content }
       else
@@ -69,6 +69,16 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:first_name, :last_name, :nationality_id, :role_id)
+      params.require(:user).permit(:first_name, :last_name, :nationality_id, :roles => [])
+    end
+
+    def convert_roles_to_objects
+      params = user_params
+      params[:roles].map! do |role|
+        if not role.empty?
+          Role.find(role)
+        end
+      end.compact!
+      params
     end
 end
