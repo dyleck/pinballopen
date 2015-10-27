@@ -8,8 +8,24 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
+ */
+
+@import "bootstrap-sprockets"
+@import "bootstrap"
+
+
+/*
  *= require_self
  *= require_tree .
- @import "bootstrap-sprockets"
- @import "bootstrap"
  */
+
+body
+  padding-top: 70px
+
+.btn-primary:visited
+  color: lightgrey
+
+.flag_class
+  width: 50px
+  height: 30px
+  border: 1px solid black

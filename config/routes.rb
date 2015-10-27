@@ -1,4 +1,6 @@
 Pinballopen::Application.routes.draw do
+  root 'users#index'
+
   resources :roles
 
   resources :nationalities
