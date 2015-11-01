@@ -12,5 +12,5 @@ Role.create(name: "Admin")
 Role.create(name: "SuperAdmin")
 
 Nationality.delete_all
-Nationality.create name: "Polish", flag_img_path: "polish.jpg"
-Nationality.create name: "English", flag_img_path: "english.jpg"
+Nationality.create name: "Polish", flag_img_path: "pl.gif"
+Nationality.create name: "English", flag_img_path: "en.gif"
