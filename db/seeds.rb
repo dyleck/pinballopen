@@ -14,3 +14,21 @@ Role.create(name: "SuperAdmin")
 Nationality.delete_all
 Nationality.create name: "Polish", flag_img_path: "pl.gif"
 Nationality.create name: "English", flag_img_path: "en.gif"
+
+User.delete_all
+User.create first_name: 'Marcin', last_name: 'Dylewski',
+            roles: [Role.find_by_name('Admin'),
+                    Role.find_by_name('Player'),
+                    Role.find_by_name('SuperAdmin')],
+            nationality: Nationality.find_by_name('Polish')
+User.create first_name: 'Jakub', last_name: 'Ciepliński',
+            roles: [Role.find_by_name('Admin'),
+                    Role.find_by_name('Player')],
+            nationality: Nationality.find_by_name('Polish')
+User.create first_name: 'David', last_name: 'Main',
+            roles: [Role.find_by_name('Player')],
+            nationality: Nationality.find_by_name('English')
+
+User.create first_name: 'Ewa', last_name: 'Mezglewska',
+            roles: [Role.find_by_name('Admin')],
+            nationality: Nationality.find_by_name('Polish')
