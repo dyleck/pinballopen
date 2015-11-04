@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  has_secure_password
+
   belongs_to :nationality
   has_and_belongs_to_many :roles
   has_many :scores

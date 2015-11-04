@@ -23,12 +23,18 @@
     <%= f.label :nationality_id %><br>
     <%= f.select :nationality_id, options_for_select(Nationality.all.map { |n| [n.name, n.id] }) %>
   </div>
-  <div class="field">
+  <div>
     <%= f.label :role %><br>
     <%= f.collection_select :roles, Role.all, :id, :name,
-                            { selected: @user.roles.map { |r| r.id } },
+                             { selected: @user.roles.map { |r| r.id } },
                             { multiple: true } %>
   </div>
+    <div>
+      <%= f.label :password %><br>
+      <%= f.password_field :password %><br>
+      <%= f.label :password_confirmation %><br>
+      <%= f.password_field :password_confirmation %>
+    </div>
   <div class="actions">
     <%= f.submit %>
   </div>
