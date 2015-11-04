@@ -1,0 +1,27 @@
+<div class="container-fluid">
+  <h1 class="text-center">Create match</h1>
+  <%= form_for(@match) do |f| %>
+    <div class="form">
+      <%= f.label :table_id %><br>
+      <%= f.select :table_id, options_from_collection_for_select(Table.all, :id, :name) %>
+    </div>
+    <div id="players_form" class="form">
+      <%= f.label :users %><br>
+      <div id="players">
+        <div id="player">
+          <%= f.select :users, options_from_collection_for_select(User.all, :id, :get_player_full_name),
+                       {}, { name: 'match[users][]', id: 'player1' } %>
+
+        </div>
+        <div>
+          <%= f.label :users %><br>
+          <%= f.text_field :users, { name: 'match[users][]', type: 'number' } %>
+        </div>
+      </div>
+      <div>
+        <button class="btn btn-primary" id="addPlayer">Add player</button>
+      </div>
+    </div>
+      <%= f.submit %>
+  <% end %>
+</div>

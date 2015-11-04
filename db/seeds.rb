@@ -32,3 +32,13 @@ User.create first_name: 'David', last_name: 'Main',
 User.create first_name: 'Ewa', last_name: 'Mezglewska',
             roles: [Role.find_by_name('Admin')],
             nationality: Nationality.find_by_name('Polish')
+
+Match.delete_all
+
+Score.delete_all
+
+Table.delete_all
+Table.create name: 'Medieval Madness'
+Table.create name: 'Road Show'
+Table.create name: 'Indiana Jones'
+

@@ -1,4 +1,9 @@
 Pinballopen::Application.routes.draw do
+  get "matches" => 'match#index'
+  get "matches/new" => 'match#new'
+  post "matches" => 'match#create'
+  resources :tables
+
   root 'users#index'
 
   resources :roles

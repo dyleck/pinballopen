@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151023130546) do
+ActiveRecord::Schema.define(version: 20151101200121) do
+
+  create_table "matches", force: true do |t|
+    t.integer  "table_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "matches", ["table_id"], name: "index_matches_on_table_id"
 
   create_table "nationalities", force: true do |t|
     t.string   "name"
@@ -33,6 +41,23 @@ ActiveRecord::Schema.define(version: 20151023130546) do
 
   add_index "roles_users", ["role_id"], name: "index_roles_users_on_role_id"
   add_index "roles_users", ["user_id"], name: "index_roles_users_on_user_id"
+
+  create_table "scores", force: true do |t|
+    t.integer  "value"
+    t.integer  "match_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "scores", ["match_id"], name: "index_scores_on_match_id"
+  add_index "scores", ["user_id"], name: "index_scores_on_user_id"
+
+  create_table "tables", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "first_name"
