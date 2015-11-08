@@ -24,7 +24,7 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    @user = User.new convert_roles_to_objects
+    @user = User.new set_player_role
 
     respond_to do |format|
       if @user.save
@@ -69,7 +69,7 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:first_name, :last_name, :nationality_id, :password, :password_confirmation, :roles => [] )
+      params.require(:user).permit(:first_name, :last_name, :nationality_id, :password, :password_confirmation, :email, :roles => [] )
     end
 
     def convert_roles_to_objects
@@ -79,6 +79,12 @@ class UsersController < ApplicationController
           Role.find(role)
         end
       end.compact!
+      params
+    end
+
+    def set_player_role
+      params = user_params
+      params[:roles] = [Role.find_by_name('Player')]
       params
     end
 end

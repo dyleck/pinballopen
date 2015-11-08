@@ -10,6 +10,10 @@ Pinballopen::Application.routes.draw do
 
   resources :nationalities
 
+  controller :users do
+    get 'register' => :new
+  end
+
   resources :users
 
   # The priority is based upon order of creation: first created -> highest priority.
