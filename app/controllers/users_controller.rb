@@ -45,14 +45,16 @@ class UsersController < ApplicationController
       if @user.id == params[:user_id].to_i
         respond_to do |format|
           if @user.update active: true
+            UserNotifier.activated(@user).deliver
             format.html { redirect_to @user }
           else
             format.html { redirect_to root_url }
           end
         end
       end
+    else
+      redirect_to root_url
     end
-    redirect_to root_url
   end
 
 

@@ -8,7 +8,7 @@ class UserNotifier < ActionMailer::Base
   #
   def created(user)
     @user = user
-    mail to: user.email, subject: 'created'
+    mail to: user.email, subject: 'Your account has been created.'
   end
 
   # Subject can be set in your I18n file at config/locales/en.yml
@@ -18,6 +18,6 @@ class UserNotifier < ActionMailer::Base
   #
   def activated(user)
     @user = user
-    mail to: user.email, subject: 'activated'
+    mail to: user.email, subject: 'Your account has been activated.'
   end
 end
