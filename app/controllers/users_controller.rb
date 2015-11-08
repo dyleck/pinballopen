@@ -28,6 +28,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
+        UserNotifier.created(@user).deliver
         format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render action: 'show', status: :created, location: @user }
       else
@@ -37,11 +38,29 @@ class UsersController < ApplicationController
     end
   end
 
+  # get /users/:id/activate
+  def activate
+    if params[:token]
+      @user = User.find_by_token(params[:token])
+      if @user.id == params[:user_id].to_i
+        respond_to do |format|
+          if @user.update active: true
+            format.html { redirect_to @user }
+          else
+            format.html { redirect_to root_url }
+          end
+        end
+      end
+    end
+    redirect_to root_url
+  end
+
+
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
     respond_to do |format|
-      if @user.update convert_roles_to_objects
+      if @user.update
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { head :no_content }
       else

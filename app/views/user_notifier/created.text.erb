@@ -1,0 +1,6 @@
+Hello there <%= @user.get_player_full_name %>!
+
+Thanks for registering in our super awesome tournament app. In order to activate your account please follow the below link:
+
+<%= "http://home.dylux.net/users/#{@user.id}/activate?token=#{@user.token}" %>
+

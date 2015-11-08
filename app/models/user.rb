@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
   has_secure_password
+  has_secure_token
+
   before_validation :capitalize_names
 
   belongs_to :nationality
@@ -11,7 +13,7 @@ class User < ActiveRecord::Base
   validates :nationality_id, inclusion: { in: Nationality.ids }
   validates :email, format: { with: /\A[a-zA-Z0-9\.\+_]+@[a-zA-Z0-9_]+\.[a-zA-Z]+/}
   validates :email, uniqueness: { case_sensitive: false }
-  validate :check_uniqueness_of_full_name
+  validate :check_uniqueness_of_full_name, on: :create
 
   def self.get_player_count
     player = Role.find_by_name('Player')

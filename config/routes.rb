@@ -14,7 +14,9 @@ Pinballopen::Application.routes.draw do
     get 'register' => :new
   end
 
-  resources :users
+  resources :users do
+    get 'activate' => 'users#activate'
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

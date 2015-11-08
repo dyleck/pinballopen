@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151106161918) do
+ActiveRecord::Schema.define(version: 20151108171933) do
 
   create_table "matches", force: true do |t|
     t.integer  "table_id"
@@ -67,6 +67,8 @@ ActiveRecord::Schema.define(version: 20151106161918) do
     t.datetime "updated_at"
     t.text     "password_digest"
     t.text     "email"
+    t.boolean  "active"
+    t.string   "token"
   end
 
   add_index "users", ["nationality_id"], name: "index_users_on_nationality_id"

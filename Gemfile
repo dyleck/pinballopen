@@ -39,6 +39,7 @@ gem 'bcrypt', '~> 3.1.7'
 
 # Use unicorn as the app server
 # gem 'unicorn'
+gem 'has_secure_token'
 
 # Use Capistrano for deployment
 # gem 'capistrano', group: :development
