@@ -14,7 +14,7 @@ module UsersHelper
           res.join.html_safe
         end
         if not @user.errors[name].empty?
-          res << content_tag(:strong, @user.errors[name].first, class: 'help-block')
+          res << content_tag(:strong, @user.errors[name].first, class: 'help-block', style: 'color: red;')
         end
         res.join.html_safe
       end
