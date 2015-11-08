@@ -7,6 +7,7 @@
         <td>Name</td>
         <td>Nationality</td>
         <td>Roles</td>
+        <td>Activated?</td>
         <td>Actions</td>
       </tr>
       </thead>
@@ -22,12 +23,17 @@
                 <% end %>
               </ul>
             </td>
+            <td class="activated">
+              <%= user.active? %>
+            </td>
             <td>
               <%= link_to 'Show', user, class: 'btn btn-info btn-xs' %>
               <%= link_to 'Edit', edit_user_path(user), class: 'btn btn-warning btn-xs' %>
+<!--
               <%= link_to 'Destroy', user, method: :delete,
                           data: { confirm: 'Are you sure?' },
                           class: 'btn btn-danger btn-xs' %>
+-->
             </td>
           </tr>
         <% end %>
