@@ -2,29 +2,26 @@
   <%= form_for(@user, html: { class: 'form-horizontal', role: 'form' } ) do |f| %>
     <div class="input-group new-user-input-group has-feedback <%= 'has-error' if not @user.errors[:email].empty? %>">
       <span class="input-group-addon new-user-group-addon">Email</span>
-      <% if @user.errors[:email].empty? %>
-        <%= f.text_field :email, class: 'form-control col-sm-8 col-xs-6' %>
-      <% else %>
-        <%= f.text_field :email, class: 'form-control col-sm-8 col-xs-6', placeholder: @user.errors[:email] %>
+      <%= f.text_field :email, class: 'form-control col-sm-8 col-xs-6' %>
+      <% if not @user.errors[:email].empty? %>
+        <span class="form-control custom-form-error"><%= @user.errors[:email].first %></span>
         <span class="form-control-feedback glyphicon glyphicon-remove"></span>
       <% end %>
     </div>
 
     <div class="input-group new-user-input-group has-feedback <%= 'has-error' if not @user.errors[:first_name].empty? %>">
       <span class="input-group-addon new-user-group-addon">First Name</span>
-      <% if @user.errors[:first_name].empty? %>
-        <%= f.text_field :first_name, class: 'form-control col-sm-8 col-xs-6' %>
-      <% else %>
-        <%= f.text_field :first_name, class: 'form-control col-sm-8 col-xs-6', placeholder: @user.errors[:first_name] %>
+      <%= f.text_field :first_name, class: 'form-control col-sm-8 col-xs-6' %>
+      <% if not @user.errors[:first_name].empty? %>
+        <span class="form-control custom-form-error"><%= @user.errors[:first_name].first %></span>
         <span class="form-control-feedback glyphicon glyphicon-remove"></span>
       <% end %>
     </div>
     <div class="input-group new-user-input-group has-feedback <%= 'has-error' if not @user.errors[:last_name].empty? %>">
       <span class="input-group-addon new-user-group-addon">Last Name</span>
-      <% if @user.errors[:last_name].empty? %>
-        <%= f.text_field :last_name, class: 'form-control col-sm-8 col-xs-6' %>
-      <% else %>
-        <%= f.text_field :last_name, class: 'form-control col-sm-8 col-xs-6', placeholder: @user.errors[:last_name] %>
+      <%= f.text_field :last_name, class: 'form-control col-sm-8 col-xs-6' %>
+      <% if not @user.errors[:last_name].empty? %>
+        <span class="form-control custom-form-error"><%= @user.errors[:last_name].first %></span>
         <span class="form-control-feedback glyphicon glyphicon-remove"></span>
       <% end %>
     </div>
@@ -38,21 +35,19 @@
     </div>
     <div class="input-group new-user-input-group has-feedback <%= 'has-error' if not @user.errors[:password].empty? %>">
       <span class="input-group-addon new-user-group-addon">Password</span>
-      <% if @user.errors[:password].empty? %>
-        <%= f.password_field :password, class: 'form-control col-sm-8 col-xs-6' %>
-      <% else %>
-        <%= f.password_field :password, class: 'form-control col-sm-8 col-xs-6', placeholder: @user.errors[:password] %>
+      <%= f.password_field :password, class: 'form-control col-sm-8 col-xs-6' %>
+      <% if not @user.errors[:password].empty? %>
         <span class="form-control-feedback glyphicon glyphicon-remove"></span>
+        <span class="form-control custom-form-error"><%= @user.errors[:password].first %></span>
       <% end %>
     </div>
 
     <div class="input-group new-user-input-group has-feedback <%= 'has-error' if not @user.errors[:password_confirmation].empty? %>">
       <span class="input-group-addon new-user-group-addon">Confirm Password</span>
-      <% if @user.errors[:password_confirmation].empty? %>
-        <%= f.password_field :password_confirmation, class: 'form-control col-sm-8 col-xs-6' %>
-      <% else %>
-        <%= f.password_field :password_confirmation, class: 'form-control col-sm-8 col-xs-6', placeholder: @user.errors[:password_confirmation] %>
+      <%= f.password_field :password_confirmation, class: 'form-control col-sm-8 col-xs-6' %>
+      <% if not @user.errors[:password_confirmation].empty? %>
         <span class="form-control-feedback glyphicon glyphicon-remove"></span>
+        <span class="form-control custom-form-error"><%= @user.errors[:password_confirmation].first %></span>
       <% end %>
     </div>
     <div class="actions text-center">
