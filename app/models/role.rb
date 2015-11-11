@@ -5,12 +5,14 @@ class Role < ActiveRecord::Base
 
   def <=>(other)
     if self.name == 'SuperAdmin'
+      return 0 if other.name == 'SuperAdmin'
       return 1
     elsif self.name == 'Admin'
       return -1 if other.name == 'SuperAdmin'
       return 0 if other.name == 'Admin'
       return 1
     else
+      return 0 if other.name == 'Player'
       return -1
     end
   end
