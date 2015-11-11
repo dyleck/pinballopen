@@ -8,7 +8,7 @@ class SessionController < ApplicationController
     p = params.require(:session).permit(:email, :password)
     if user = User.find_by_email(p[:email]) and user.authenticate(p[:password])
       session[:user_id] = user.id
-      redirect_to root_url
+      redirect_to user
     else
       redirect_to login_url, notice: 'Password invalid'
     end

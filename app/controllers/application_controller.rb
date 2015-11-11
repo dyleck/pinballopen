@@ -4,8 +4,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :authorize
 
-  @@auth_matrix = { 'Admin'  => ['users/index', 'matches/new', 'matches/create', 'tables/new', 'tables/create', 'tables/update', 'users/udpate', 'users/destroy'],
-                   'Player' => ['user/show'], }
+  @@auth_matrix = { 'Admin'  => ['users/index', 'matches/new', 'matches/create', 'tables/new', 'tables/create', 'tables/update', 'users/destroy'],
+                   'Player' => ['users/show', 'users/udpate'], }
 
   def authorize
     if session[:user_id]
