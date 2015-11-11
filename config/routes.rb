@@ -1,4 +1,7 @@
 Pinballopen::Application.routes.draw do
+  get "static_pages/home"
+  get "static_pages/faq"
+  get "static_pages/about"
   get 'login', to: 'session#new'
   post 'login', to: 'session#create'
   delete 'logout', to: 'session#destroy'
@@ -7,7 +10,7 @@ Pinballopen::Application.routes.draw do
   post "matches" => 'match#create'
   resources :tables
 
-  root 'users#index'
+  root 'static_pages#home'
 
   resources :roles
 
