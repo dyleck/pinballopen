@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  skip_before_action :authorize, only: [:new, :create]
+  skip_before_action :authorize, only: [:new, :create, :activate, :index]
 
   # GET /users
   # GET /users.json
@@ -29,9 +29,8 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        session[:user_id] = @user.id
         UserNotifier.created(@user).deliver
-        format.html { redirect_to @user, notice: 'Check your email for activation link.' }
+        format.html { render action: 'create' }
         format.json { render action: 'show', status: :created, location: @user }
       else
         format.html { render action: 'new' }
@@ -44,9 +43,10 @@ class UsersController < ApplicationController
   def activate
     if params[:token]
       @user = User.find_by_token(params[:token])
-      if @user.id == params[:user_id].to_i
+      if not @user.active? and @user.id == params[:user_id].to_i
         respond_to do |format|
           if @user.update active: true
+            session[:user_id] = @user.id
             UserNotifier.activated(@user).deliver
             format.html { redirect_to @user }
           else
