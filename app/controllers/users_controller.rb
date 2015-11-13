@@ -48,7 +48,7 @@ class UsersController < ApplicationController
           if @user.update active: true
             session[:user_id] = @user.id
             UserNotifier.activated(@user).deliver
-            format.html { redirect_to @user }
+            format.html { redirect_to @user, notice: 'Your account is activated now. Thanks' }
           else
             format.html { redirect_to root_url }
           end
