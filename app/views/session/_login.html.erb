@@ -1,7 +1,12 @@
-<%= form_for :session, url: login_path, class: 'form-group' do |f| %>
-  <%= f.label :email, 'Enter your email', for: :email %>
-  <%= f.text_field :email, class: 'form-control' %>
-  <%= f.label :password, 'Enter your password', for: :password %>
-  <%= f.text_field :password, type: :password, class: 'form-control' %>
-  <%= f.submit 'Login', class: 'btn btn-primary form-control' %>
+<%= form_for :session, url: login_path do |f| %>
+  <div class="form-group">
+    <%= f.label :email, 'Enter your email', for: :email %>
+    <%= f.text_field :email, class: 'form-control' %>
+    <%= f.label :password, 'Enter your password', for: :password %>
+    <%= f.text_field :password, type: :password, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.submit 'Login', class: 'btn btn-primary form-control' %>
+    Do not have account? <%= link_to 'Register Now!', new_user_path %>
+  </div>
 <% end %>

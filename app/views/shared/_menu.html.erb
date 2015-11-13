@@ -23,7 +23,6 @@
                 <li><%= link_to 'Logoff', logout_path, method: :delete %></li>
               <% else %>
                 <%= render 'session/login' %>
-                <li><%= link_to 'Register', register_path %></li>
               <% end %>
             </ul>
           </li>
