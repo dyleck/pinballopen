@@ -23,20 +23,7 @@ User.create first_name: 'Marcin', last_name: 'Dylewski',
             nationality: Nationality.find_by_name('Polish'),
             password: '123', password_confirmation: '123',
             email: 'bounceerr@gmail.com'
-#User.create first_name: 'Jakub', last_name: 'Ciepliński',
-#            roles: [Role.find_by_name('Admin'),
-#                    Role.find_by_name('Player')],
-#            nationality: Nationality.find_by_name('Polish'),
-#            password: '123', password_confirmation: '123'
-#User.create first_name: 'David', last_name: 'Main',
-#            roles: [Role.find_by_name('Player')],
-#            nationality: Nationality.find_by_name('English'),
-#            password: '123', password_confirmation: '123'
-#
-#User.create first_name: 'Ewa', last_name: 'Mezglewska',
-#            roles: [Role.find_by_name('Admin')],
-#            nationality: Nationality.find_by_name('Polish'),
-#            password: '123', password_confirmation: '123'
+
 
 Match.delete_all
 
