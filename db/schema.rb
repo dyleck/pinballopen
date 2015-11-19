@@ -11,14 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151108171933) do
+ActiveRecord::Schema.define(version: 20151119195531) do
 
   create_table "matches", force: true do |t|
     t.integer  "table_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "round_id"
   end
 
+  add_index "matches", ["round_id"], name: "index_matches_on_round_id"
   add_index "matches", ["table_id"], name: "index_matches_on_table_id"
 
   create_table "nationalities", force: true do |t|
@@ -26,6 +28,18 @@ ActiveRecord::Schema.define(version: 20151108171933) do
     t.string   "flag_img_path"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "phases", force: true do |t|
+    t.integer  "number_of_rounds"
+    t.integer  "matches_per_round"
+    t.integer  "players_per_round"
+    t.boolean  "player_fixed"
+    t.boolean  "phase_fixed"
+    t.integer  "tournament_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "type"
   end
 
   create_table "roles", force: true do |t|
@@ -42,6 +56,14 @@ ActiveRecord::Schema.define(version: 20151108171933) do
   add_index "roles_users", ["role_id"], name: "index_roles_users_on_role_id"
   add_index "roles_users", ["user_id"], name: "index_roles_users_on_user_id"
 
+  create_table "rounds", force: true do |t|
+    t.integer  "phase_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "rounds", ["phase_id"], name: "index_rounds_on_phase_id"
+
   create_table "scores", force: true do |t|
     t.integer  "value"
     t.integer  "match_id"
@@ -54,6 +76,12 @@ ActiveRecord::Schema.define(version: 20151108171933) do
   add_index "scores", ["user_id"], name: "index_scores_on_user_id"
 
   create_table "tables", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tournaments", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"

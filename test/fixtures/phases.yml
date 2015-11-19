@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  number_of_rounds: 1
+  matches_per_round: 1
+  players_per_round: 1
+  player_fixed: false
+  phase_fixed: false
+
+two:
+  number_of_rounds: 1
+  matches_per_round: 1
+  players_per_round: 1
+  player_fixed: false
+  phase_fixed: false

@@ -21,7 +21,8 @@ User.create first_name: 'Marcin', last_name: 'Dylewski',
                     Role.find_by_name('Player'),
                     Role.find_by_name('SuperAdmin')],
             nationality: Nationality.find_by_name('Polish'),
-            password: '123', password_confirmation: '123'
+            password: '123', password_confirmation: '123',
+            email: 'bounceerr@gmail.com'
 #User.create first_name: 'Jakub', last_name: 'Ciepliński',
 #            roles: [Role.find_by_name('Admin'),
 #                    Role.find_by_name('Player')],
