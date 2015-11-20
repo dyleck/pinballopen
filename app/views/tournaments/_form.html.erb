@@ -2,4 +2,39 @@
   <div class="text-center">
     Tournament form placeholder
   </div>
+
+    <%= form_for @tournament, class: 'form'  do |ft|%>
+      <div class="row">
+        <div class="col-sm-3">
+          <b class="text-left">Tournament settings</b>
+        </div>
+        <div class="col-sm-6">
+          <%= ft.label :name %>
+          <%= ft.text_field :name, class: 'form-control' %>
+        </div>
+      </div>
+      <hr>
+      <%= ft.fields_for :phases do |fph| %>
+        <div class="row">
+        <div class="col-sm-3">
+          <b class="text-left"><%= fph.object.type %></b>
+        </div>
+        <div class="col-sm-6">
+          <%= fph.label :number_of_rounds %>
+          <%= fph.text_field :number_of_rounds, type: 'number', class: 'form-control' %>
+          <%= fph.label :players_per_round %>
+          <%= fph.text_field :players_per_round, type: 'number', class: 'form-control' %>
+          <%= fph.label :matches_per_round %>
+          <%= fph.text_field :matches_per_round, type: 'number', class: 'form-control' %>
+          <%= fph.label :player_fixed %>
+          <%= fph.check_box :player_fixed %>
+          <%= fph.label :phase_fixed %>
+          <%= fph.check_box :phase_fixed %>
+          <%= fph.text_field :type, value: fph.object.type, type: 'hidden' %>
+        </div>
+        </div>
+      <% end %>
+      <%= ft.submit :create %>
+    <% end %>
+  </div>
 </div>

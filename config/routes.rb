@@ -10,7 +10,10 @@ Pinballopen::Application.routes.draw do
   post "matches" => 'match#create'
   resources :tables
 
-  resources :tournaments, only: [:new, :create, :edit, :update, :show]
+  resources :tournaments, only: [:new, :create, :edit, :update, :show] do
+    resources :phases, only: [:create, :edit, :update, :show]
+    resources :qualifications, only: [:create, :edit, :update, :show], controller: :phases, type: :qualification
+  end
 
   root 'static_pages#home'
 
