@@ -1,0 +1,2 @@
+class DoubleKO < Phase
+end
