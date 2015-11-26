@@ -1,8 +1,4 @@
 <div class="container">
-  <div class="text-center">
-    Tournament form placeholder
-  </div>
-
     <%= form_for @tournament, class: 'form'  do |ft|%>
       <div class="row">
         <div class="col-sm-3">
@@ -13,8 +9,8 @@
           <%= ft.text_field :name, class: 'form-control' %>
         </div>
       </div>
-      <hr>
       <%= ft.fields_for :phases do |fph| %>
+        <hr>
         <div class="row">
         <div class="col-sm-3">
           <b class="text-left"><%= fph.object.type %></b>
@@ -34,7 +30,9 @@
         </div>
         </div>
       <% end %>
-      <%= ft.submit :create %>
+      <div class="text-center" style="margin: 2em;">
+      <%= ft.submit params[:action] == 'new' ? :create : :update, class: 'btn btn-primary btn-large' %>
+      </div>
     <% end %>
   </div>
 </div>

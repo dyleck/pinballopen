@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   has_secure_password
   has_secure_token
+  has_and_belongs_to_many :phases
+  has_and_belongs_to_many :tournaments
 
   before_validation :capitalize_names
 

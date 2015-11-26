@@ -1,21 +1,30 @@
 <div class="container">
   <div class="row">
     <div class="col-xs-12">
-      <h1 class="text-center">Tournament info</h1>
+      <h1 class="text-center"><%= @tournament.name %></h1>
     </div>
   </div>
   <div class="row">
-    <table class="table table-responsive">
-      <thead>
-      <tr>
-        <td>Name</td>
-      </tr>
-      </thead>
+    <table class="table table-responsive table-striped">
       <tbody>
       <tr>
-        <td><%= @tournament.name %></td>
+        <td>Players registered:</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Current phase:</td>
+        <td><%= current_phase.name.upcase %></td>
+      </tr>
+      <tr>
+        <td>Games played in current phase:</td>
+        <td><%= current_phase.rounds.joins(:scores).count %></td>
+      </tr>
+      <tr>
+        <td>Games played in total</td>
+        <td><%= @tournament.phases.each.sum {|phase| phase.rounds.joins(:scores).count } %></td>
       </tr>
       </tbody>
     </table>
+    <%= link_to 'Edit', edit_tournament_path(@tournament), class: 'btn btn-primary' %>
   </div>
 </div>

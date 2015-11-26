@@ -1,5 +1,5 @@
 class TournamentsController < ApplicationController
-  before_action :set_tournament, only: [:show, :edit]
+  before_action :set_tournament, only: [:show, :edit, :update, :init]
 
   def show
 
@@ -17,13 +17,28 @@ class TournamentsController < ApplicationController
 
   def create
     @tournament = Tournament.new tournament_params
-    @tournament.save!
+    if @tournament.save
+      redirect_to @tournament
+    else
+      #TODO error handling
+    end
   end
 
   def edit
+
   end
 
   def update
+    if @tournament.update tournament_params
+      redirect_to tournament_url
+    else
+      # TODO error handling
+    end
+  end
+
+  def init
+    @tournament.init
+    redirect_to new_tournament_match_url(@tournament)
   end
 
   private

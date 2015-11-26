@@ -33,12 +33,12 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Road Show</td>
-            <td>189 000 123</td>
-            <td>12</td>
-            <td>24</td>
-          </tr>
+          <% @matches_played_by_player.each do |match| %>
+            <tr>
+              <td><%= Table.find(match.table_id).name %></td>
+b              <td><%= @matches_played_by_player.joins(:scores).select("scores.value").where("matches.table_id" => match.table.id).first.value %></td>
+            </tr>
+          <% end %>
         </tbody>
       </table>
     </div>

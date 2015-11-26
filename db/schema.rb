@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151119195531) do
+ActiveRecord::Schema.define(version: 20151124202725) do
 
   create_table "matches", force: true do |t|
     t.integer  "table_id"
@@ -42,6 +42,14 @@ ActiveRecord::Schema.define(version: 20151119195531) do
     t.string   "type"
   end
 
+  create_table "phases_users", force: true do |t|
+    t.integer "phase_id"
+    t.integer "user_id"
+  end
+
+  add_index "phases_users", ["phase_id"], name: "index_phases_users_on_phase_id"
+  add_index "phases_users", ["user_id"], name: "index_phases_users_on_user_id"
+
   create_table "roles", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -65,11 +73,9 @@ ActiveRecord::Schema.define(version: 20151119195531) do
   add_index "rounds", ["phase_id"], name: "index_rounds_on_phase_id"
 
   create_table "scores", force: true do |t|
-    t.integer  "value"
-    t.integer  "match_id"
-    t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer "value",    default: 0
+    t.integer "match_id"
+    t.integer "user_id"
   end
 
   add_index "scores", ["match_id"], name: "index_scores_on_match_id"
@@ -85,7 +91,16 @@ ActiveRecord::Schema.define(version: 20151119195531) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "current_phase", default: 0
   end
+
+  create_table "tournaments_users", force: true do |t|
+    t.integer "tournament_id"
+    t.integer "user_id"
+  end
+
+  add_index "tournaments_users", ["tournament_id"], name: "index_tournaments_users_on_tournament_id"
+  add_index "tournaments_users", ["user_id"], name: "index_tournaments_users_on_user_id"
 
   create_table "users", force: true do |t|
     t.string   "first_name"
@@ -94,7 +109,7 @@ ActiveRecord::Schema.define(version: 20151119195531) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "password_digest"
-    t.text     "email"
+    t.text     "email",           default: "f"
     t.boolean  "active"
     t.string   "token"
   end

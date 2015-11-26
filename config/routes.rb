@@ -5,14 +5,14 @@ Pinballopen::Application.routes.draw do
   get 'login', to: 'session#new'
   post 'login', to: 'session#create'
   delete 'logout', to: 'session#destroy'
-  get "matches" => 'match#index'
-  get "matches/new" => 'match#new'
-  post "matches" => 'match#create'
+
   resources :tables
 
   resources :tournaments, only: [:new, :create, :edit, :update, :show] do
+    member { get 'init' }
     resources :phases, only: [:create, :edit, :update, :show]
     resources :qualifications, only: [:create, :edit, :update, :show], controller: :phases, type: :qualification
+    resources :matches
   end
 
   root 'static_pages#home'

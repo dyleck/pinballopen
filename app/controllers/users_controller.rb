@@ -11,6 +11,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    @matches_played_by_player = Match.joins(:scores).where("scores.user_id" => @user.id)
   end
 
   # GET /users/new
@@ -25,7 +26,8 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    @user = User.new set_player_role
+    @user = User.new set_player_role # TODO this is bad!
+    @user.tournaments << Tournament.first # TODO fix fixed tournmanet assignemt
 
     respond_to do |format|
       if @user.save
