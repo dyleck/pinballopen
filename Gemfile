@@ -46,3 +46,9 @@ gem 'has_secure_token'
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
+source 'https://rails-assets.org' do
+  gem 'rails-assets-smartmenus', '<1.0'
+end
+
+gem 'jquery-turbolinks'

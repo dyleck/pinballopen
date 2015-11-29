@@ -22,7 +22,7 @@
       <a class="btn btn-danger" href="#">Button 3</a>
     </div>
     <div class="col-sm-10">
-      <h2 class="text-center">Current phase situation</h2>
+      <h2 class="text-center">Current phase: <%= Tournament.first.get_current_phase.name %></h2>
       <table class="table table-responsive">
         <thead style="background: greenyellow;">
           <tr>
@@ -34,9 +34,12 @@
         </thead>
         <tbody>
           <% @matches_played_by_player.each do |match| %>
+            <% table = Table.find(match.table_id) %>
             <tr>
-              <td><%= Table.find(match.table_id).name %></td>
-b              <td><%= @matches_played_by_player.joins(:scores).select("scores.value").where("matches.table_id" => match.table.id).first.value %></td>
+              <td><%= table.name %></td>
+              <td><%= @matches_played_by_player.joins(:scores).select("scores.value").where("matches.table_id" => table.id).first.value %></td>
+              <td><%= table.get_points_for_player_in_current_phase(params[:id], Tournament.first.get_current_phase) %></td> <!-- TODO: fixed Tournament!! -->
+              <td><%= table.get_player_standing_at_table_in_current_phase(params[:id], Tournament.first.get_current_phase) %></td> <!-- TODO: as above -->
             </tr>
           <% end %>
         </tbody>

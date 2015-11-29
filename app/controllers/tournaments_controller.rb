@@ -1,5 +1,6 @@
 class TournamentsController < ApplicationController
   before_action :set_tournament, only: [:show, :edit, :update, :init]
+  skip_before_action :authorize, only: [:show]
 
   def show
 

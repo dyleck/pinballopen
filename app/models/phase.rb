@@ -15,4 +15,8 @@ class Phase < ActiveRecord::Base
   def init
     raise "AbstractMethod"
   end
+
+  def get_points_for_user_at_table(user, table)
+    raise "AbstractMethod"
+  end
 end

@@ -16,15 +16,17 @@ class MatchesController < ApplicationController
     matches_played_by_player =
         Match.where('table_id' => params[:match][:table]).joins(:scores).where('scores.user_id' => params[:match][:users])
     if matches_played_by_player.count > 0
-      # TODO Match exists, update it
-      scores = [] << Score.find(matches_played_by_player.select('scores.id'))
-      scores.each do |score|
-        if score.empty?
-          redirect_to edit_tournament_match_url(@tournament,
-                                                matches_played_by_player.select('matches.id')
-                                                .where('scores.id' => score.id).first.id)
-          return
-        end
+      scores = [] << Score.find(matches_played_by_player.select('scores.id').where.not('scores.value' => [0, nil]).map(&:id))
+      scores.flatten!
+      if scores.length > 0
+        # TODO: Add joker implementation, low priority
+        redirect_to new_tournament_match_url, notice: 'Joker is not available'
+        return
+      else
+        redirect_to edit_tournament_match_url(@tournament,
+                                              matches_played_by_player.select('matches.id')
+                                              .where('scores.value' => [0, nil]).first.id)
+        return
       end
     else
       round = Round.new

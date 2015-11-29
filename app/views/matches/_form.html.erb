@@ -8,15 +8,15 @@
       <%= f.label :users %><br>
       <div id="players">
         <div id="player">
-          <%= f.select :users, options_from_collection_for_select(User.all, :id, :get_player_full_name),
+          <%= f.select :users, options_from_collection_for_select(User.joins(:roles).where('roles.name' => 'Player'), :id, :get_player_full_name),
                        {}, { name: 'match[users][]', id: 'player1' } %>
 
         </div>
       </div>
-      <div>
+<!--      <div>
         <button class="btn btn-primary" id="addPlayer">Add player</button>
-      </div>
+      </div>-->
     </div>
-      <%= f.submit %>
+      <%= f.submit class: 'btn btn-primary btn-large' %>
   <% end %>
 </div>

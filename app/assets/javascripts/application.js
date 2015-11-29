@@ -11,7 +11,10 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.turbolinks
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap-sprockets
-//= require_tree .
+//= require smartmenus
+//= require smartmenus/addons/bootstrap/jquery.smartmenus.bootstrap.js
+////= require_tree .
