@@ -134,12 +134,16 @@ class UsersController < ApplicationController
 
     def authorize_this_user_only
       user = User.find(params[:id])
-      if user.token and params[:token] == user.token
-        session[:user_id] = params[:id]
-        user.token = nil
-        user.save
-        return true
+      if user
+        if params[:token] and user.token and params[:token] == user.token
+          session[:user_id] = params[:id]
+          user.token = nil
+          user.save
+          return true
+        else
+          return true if user.id == session[:user_id].to_i
+        end
       end
-      redirect_to login_url, notice: 'Permission denied' if session[:user_id] != @user.id
+      redirect_to login_url, notice: 'Permission denied'
     end
 end
