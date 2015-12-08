@@ -7,6 +7,7 @@
   </div>
   <div class="form-group">
     <%= f.submit 'Login', class: 'btn btn-primary form-control' %>
-    Do not have account? <%= link_to 'Register Now!', new_user_path %>
+    Do not have account? <%= link_to 'Register Now!', new_user_path %><br>
+    <%= link_to 'Click here', password_path %> if you don't remember your password.
   </div>
 <% end %>

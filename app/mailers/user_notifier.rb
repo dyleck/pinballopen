@@ -20,4 +20,9 @@ class UserNotifier < ActionMailer::Base
     @user = user
     mail to: user.email, subject: 'Your account has been activated.'
   end
+
+  def pass_reset(user)
+    @user = user
+    mail to: user.email, subject: 'Pinballopen password reset request.'
+  end
 end

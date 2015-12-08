@@ -23,6 +23,8 @@ Pinballopen::Application.routes.draw do
 
   controller :users do
     get 'register' => :new
+    get 'password' => :request_password_reset
+    post 'password' => :process_password_reset
   end
 
   resources :users do

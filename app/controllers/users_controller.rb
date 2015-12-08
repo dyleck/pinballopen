@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  skip_before_action :authorize, only: [:new, :create, :activate, :index]
+  skip_before_action :authorize, only: [:new, :create, :activate, :index, :edit, :update, :request_password_reset, :process_password_reset]
+  before_action :authorize_this_user_only, only: [:edit, :update]
 
   # GET /users
   # GET /users.json
@@ -21,6 +22,24 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+  end
+
+  def request_password_reset
+    @user = User.new
+  end
+
+  def process_password_reset
+    @user = User.find_by_email(user_params[:email])
+    if not @user
+      flash[:type] = :danger
+      flash[:message] = "Email not registered."
+      redirect_to password_url
+      return false
+    end
+    @user.regenerate_token
+    UserNotifier.pass_reset(@user).deliver
+    flash[:type] = :success
+    flash[:message] = "Check your inbox for password reset instruction."
   end
 
   # POST /users
@@ -66,7 +85,7 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1.json
   def update
     respond_to do |format|
-      if @user.update
+      if @user.update user_params
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { head :no_content }
       else
@@ -111,5 +130,16 @@ class UsersController < ApplicationController
       params = user_params
       params[:roles] = [Role.find_by_name('Player')]
       params
+    end
+
+    def authorize_this_user_only
+      user = User.find(params[:id])
+      if user.token and params[:token] == user.token
+        session[:user_id] = params[:id]
+        user.token = nil
+        user.save
+        return true
+      end
+      redirect_to login_url, notice: 'Permission denied' if session[:user_id] != @user.id
     end
 end

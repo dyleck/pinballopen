@@ -1,0 +1,6 @@
+Hello there <%= @user.get_player_full_name %>!
+
+You can update your password using the following url:
+
+<%= "http://home.dylux.net/users/#{@user.id}/edit?token=#{@user.token}" %>
+
