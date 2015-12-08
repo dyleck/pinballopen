@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :tournaments
 
   before_validation :capitalize_names
+  before_validation :downcase_email
 
   belongs_to :nationality
   has_and_belongs_to_many :roles
@@ -40,4 +41,7 @@ class User < ActiveRecord::Base
       last_name.capitalize!
     end
 
+    def downcase_email
+      email.downcase!
+    end
 end

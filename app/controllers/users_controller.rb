@@ -29,7 +29,7 @@ class UsersController < ApplicationController
   end
 
   def process_password_reset
-    @user = User.find_by_email(user_params[:email])
+    @user = User.find_by_email(user_params[:email].downcase)
     if not @user
       flash[:type] = :danger
       flash[:message] = "Email not registered."
